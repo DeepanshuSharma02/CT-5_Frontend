@@ -18,12 +18,10 @@ function App() {
     setLoading(true);
     setError('');
     try {
-      // Make POST request to FastAPI backend
       const response = await axios.post('https://ct-5.onrender.com/predict/', {
         text: text,
       });
-
-      setPrediction(response.data.prediction);  // Set prediction from backend response
+      setPrediction(response.data.prediction);
     } catch (err) {
       setError('Error occurred while fetching prediction.');
       console.error(err);
@@ -34,6 +32,12 @@ function App() {
 
   return (
     <div className="App">
+      <div className="marquee-bar">
+        <marquee behavior="scroll" direction="left">
+          ⚖️ Justice delayed is justice denied · 📚 AI Legal Advisor · 🏛️ Know Your Rights · 🕊️ Fairness. Accuracy. Empowerment.
+        </marquee>
+      </div>
+
       <h1>Legal Text Classifier</h1>
       <form onSubmit={handleSubmit}>
         <textarea
@@ -51,7 +55,6 @@ function App() {
 
       {error && <p className="error">{error}</p>}
 
-      
       {prediction && (
         <div>
           <h3>Prediction Result:</h3>
